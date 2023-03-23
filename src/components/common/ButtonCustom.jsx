@@ -1,20 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
+
 import { Button } from "@material-tailwind/react";
-import { ButtonProps } from "@material-tailwind/react";
-import { useState } from "react";
 
 export default function ButtonCustom({
   className = "",
   variant = "filled",
   size = "md",
-  color="#7854F7",
   fullWidth = false,
   children,
-  onClick=()=>{}
+  onClick = () => {},
+  type = "primary",
 }) {
+  const bg = type === "primary" ? "bg-[#7854F7]" : "bg-[#000000]";
   return (
     <Button
-      className={`${className} bg-[${color}] h-[70px] px-[90px] rounded-[60px]`}
+      className={`${bg} h-fit  text-lg md:h-[60px]  px-[40px] md:px-[90px] rounded-[60px] normal-case ${className}`}
       variant={variant}
       size={size}
       fullWidth={fullWidth}

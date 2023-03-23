@@ -12,7 +12,7 @@ const stringifyParams = (data) => {
   });
 };
 
-const API_URL = process.env.URL_API;
+export const API_URL = process.env.URL_API;
 
 const defaultOptions = {};
 

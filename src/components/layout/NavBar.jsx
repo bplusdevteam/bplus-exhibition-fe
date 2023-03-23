@@ -1,24 +1,33 @@
 /* eslint-disable @next/next/no-img-element */
 import Image from "next/image";
-import { useState } from "react";
-import Logo from "../..//assets/image/logo.svg";
-import Instagram from "../..//assets/image/intagram.svg";
-import Facebook from "../..//assets/image/facebook.svg";
+import { useEffect, useState } from "react";
+import Logo from "../../assets/image/logo.svg";
+import Instagram from "../../assets/image/intagram.svg";
+import Facebook from "../../assets/image/facebook.svg";
+import Link from "next/link";
 
 export default function NavBar() {
   const [navbar, setNavbar] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
+  useEffect(() => {
+    const html = document.getElementsByTagName("html")[0];
+    if (navbar) {
+      html.style.overflowY = "hidden";
+    } else {
+      html.style.overflowY = "auto";
+    }
+  }, [navbar]);
 
   const navbars = [
     {
       id: 1,
       name: "CÂU CHUYỆN B+",
-      url: "#",
+      url: "/Story",
     },
     {
       id: 2,
       name: "CHƯƠNG TRÌNH",
-      url: "#",
+      url: "/Program",
       child: [
         {
           name: "OPENING",
@@ -60,13 +69,17 @@ export default function NavBar() {
   ];
 
   return (
-    <nav className=" bg-white md:h-[210px] flex items-center">
-      <div className="container flex flex-col md:flex-row  items-center justify-between mx-auto mt-2">
-        <div className="flex justify-between w-full md:w-auto md:shadow-none shadow-sm py-3 px-6 md:px-0">
-          <a href="#" className="flex items-center">
-            <Image src={Logo} className="w-[60px] md:w-auto" alt="logo-b-plus" />
-          </a>
-          <div 
+    <nav className=" bg-white md:h-[210px] flex items-center  shadow-sm">
+      <div className="container flex flex-col md:flex-row  items-center justify-between mx-auto">
+        <div className="flex justify-between w-full md:w-auto  py-3 px-6 md:px-0">
+          <Link href="/" className="flex items-center">
+            <Image
+              src={Logo}
+              className="w-[60px] md:w-auto"
+              alt="logo-b-plus"
+            />
+          </Link>
+          <div
             className="block md:hidden"
             onClick={() => {
               setNavbar(!navbar);
@@ -88,18 +101,18 @@ export default function NavBar() {
           </div>
         </div>
         <div
-          className={`flex justify-center md:flex-col md:items-end lg:flex-row lg:items-center  w-full md:flex md:w-3/4 ${
+          className={`flex justify-center md:flex-col md:items-end lg:flex-row lg:items-center z-50  w-full md:flex md:w-[76%] ${
             navbar ? "" : "hidden"
-          } h-[calc(100vh-60px)] absolute md:relative md:h-auto bg-white top-[60px] md:top-0 `}
+          } h-[calc(100vh-56px)] fixed md:relative md:h-auto bg-white top-[56px] md:top-0 `}
         >
-          <ul className="flex flex-col px-0 lg:px-8 mt-4 mr-0 xl:mr-20 md:w-auto  md:flex-row md:space-x-8 md:mt-0 md:text-sm space-y-4 md:space-y-0 ">
+          <ul className="flex flex-col px-0 lg:px-8 mt-14 mr-0 xl:mr-20 md:w-auto  md:flex-row md:space-x-8 md:mt-0 md:text-sm space-y-10 md:space-y-0 ">
             {navbars?.map((menu, menuIndex) => (
-              <li
+              <Link href={menu.url}
                 key={menuIndex}
-                className="relative flex flex-col text-black md:cursor-pointer select-none "
-                onClick={() => {
-                  setActiveIndex(menuIndex === activeIndex ? null : menuIndex);
-                }}
+                className="relative  flex flex-col text-black md:cursor-pointer select-none "
+                // onClick={() => {
+                //   setActiveIndex(menuIndex === activeIndex ? null : menuIndex);
+                // }}
               >
                 <div className="flex ">
                   <span className="leading-5 text-base">{menu?.name}</span>
@@ -120,7 +133,7 @@ export default function NavBar() {
                   )}
                 </div>
                 {menu?.child && activeIndex === menuIndex && (
-                  <div className="z-10 relative animate-[toTop_1s_ease-in-out] md:absolute bg-[#EAEAEA] md:top-8  font-normal  w-[160px] rounded-[10px]">
+                  <div className="z-10 relative md:absolute bg-[#EAEAEA] md:top-8  font-normal   md:w-[160px] w-auto rounded-[10px]">
                     <ul className="text-sm">
                       {menu?.child.map((menuChild) => (
                         <li
@@ -133,7 +146,7 @@ export default function NavBar() {
                     </ul>
                   </div>
                 )}
-              </li>
+              </Link>
             ))}
           </ul>
           <div className="md:flex gap-x-2 hidden w-fit md:mt-4 lg:mt-0">

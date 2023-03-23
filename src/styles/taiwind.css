@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+.home-title-content-header {
+    @apply leading-normal text-[20px] md:text-[30px] xl:text-[40px] md:leading-[50px] 2xl:leading-[60px]  2xl:text-[50px] font-[600];
+  }
+  
+  .home-des-content-header {
+    @apply text-[18px] mt-5 2xl:mt-7 text-[#94A2B3]
+  }
