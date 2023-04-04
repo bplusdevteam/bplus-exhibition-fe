@@ -7,12 +7,13 @@ import SectionCountDown from "./components/SectionCountDown";
 import SectionOrators from "./components/SectionOrators";
 import SectionLogo from "./components/SectionLogo";
 import ModalRegisterExhibition from "./components/ModalRegisterExhibition";
+import ListDot from "@/components/common/ListDot";
 
 export default function Home() {
   const [pageContent, setPageContent] = useState();
   const [orators, setOrators] = useState();
   const [isLoading, setIsLoading] = useState(false);
-  const [openModalRegister, setOpenModalRegister] = useState();
+  const [openModalRegister, setOpenModalRegister] = useState(false);
 
   const getContentPage = async () => {
     try {
@@ -50,7 +51,7 @@ export default function Home() {
   return (
     <Layout isLoading={isLoading}>
       <div
-        className="w-full px-6  md:px-[5%] xl:px-[8%] 2xl:px-[10%] gap-x-[100px] py-[40px] md:py-[90px] flex md:flex-row flex-col-reverse"
+        className="w-full padding-container gap-x-[100px] py-[40px] md:py-[90px] flex md:flex-row flex-col-reverse relative"
         style={{
           background:
             "linear-gradient(180deg, rgba(255, 186, 73, 0.5) 0%, rgba(217, 217, 217, 0) 100%)",
@@ -73,6 +74,7 @@ export default function Home() {
             className="align-baseline w-full aspect-[887/556] rounded-[10px]"
           ></video>
         </div>
+        <ListDot className="absolute bottom-[30px] right-[60px]"/>
       </div>
       <SectionCountDown contentCountdown={contentCountdown} />
       <div className="flex w-full justify-center mt-8 xl:mt-14">

@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { getUrlImage } from "@/utils/utils";
 import ButtonCustom from "../common/ButtonCustom";
+import ListDot from "../common/ListDot";
 
 export default function TopPage({ topPageContent, onClickBtn }) {
   return (
@@ -17,9 +18,13 @@ export default function TopPage({ topPageContent, onClickBtn }) {
           __html: topPageContent?.textValue?.replace(/\n/g, ""),
         }}
       />
-      <ButtonCustom className="!absolute bottom-[60px] md:bottom-[80px]" onClick={onClickBtn}>
+      <ButtonCustom
+        className="!absolute bottom-[60px] md:bottom-[80px]"
+        onClick={onClickBtn}
+      >
         Đăng kí tham dự triễn lãm
       </ButtonCustom>
+      <ListDot className="absolute bottom-[-80px] right-[100px]" />
     </div>
   );
 }

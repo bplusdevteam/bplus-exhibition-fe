@@ -1,5 +1,6 @@
 import ContainerBg from "@/components/common/ContainerBg";
 import CountDownCircle from "@/components/common/CountDownCircle";
+import PlusBg from "@/components/common/PlusBg";
 import { API_URL } from "@/config/api";
 import { getUrlImage } from "@/utils/utils";
 
@@ -9,7 +10,7 @@ export default function SectionOrators({ orators }) {
   return (
     <ContainerBg
       bgMargin="right"
-      className="my-6 pt-8 md:mt-14"
+      className="my-6 pt-8 md:mt-14 relative"
       classNameChild="flex flex-col items-center"
     >
       <div className=" w-full max-w-[1030px]">
@@ -35,6 +36,7 @@ export default function SectionOrators({ orators }) {
           </div>
         ))}
       </div>
+      <PlusBg className="absolute bottom-20 right-[100px]"/>
     </ContainerBg>
   );
 }

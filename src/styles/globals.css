@@ -1,8 +1,5 @@
-
 :root {
- 
 }
-
 
 * {
   box-sizing: border-box;
@@ -14,13 +11,11 @@ html,
 body {
   max-width: 100vw;
   overflow-x: hidden;
-  height:100%;
+  height: 100%;
   min-height: 100vh;
-  font-family: 'Montserrat';
+  font-family: "Montserrat";
   font-size: 16px;
 }
-
-
 
 a {
   color: inherit;
@@ -33,20 +28,19 @@ a {
 
 .slick-slider.slick-program {
   overflow-y: inherit;
-    overflow-x: clip;
+  overflow-x: clip;
 }
 
 .item-slide-program:hover {
-  transform: scale(1)
-  
+  transform: scale(1);
 }
 .item-slide-program:hover {
-  transform: scaleX(1.2) scaleY(1.2) ;
+  transform: scaleX(1.2) scaleY(1.2);
   transition: all 0.4s ease-in-out;
   z-index: 999;
   box-shadow: 5px 10px 18px #888888;
 }
-.slide-program-content  {
+.slide-program-content {
   opacity: 0;
   visibility: hidden;
 }
@@ -56,12 +50,14 @@ a {
   transition: all 0.4s ease-in-out;
 }
 
-.slick-program .slick-slide.slick-active.slick-current .item-slide-program:hover{
+.slick-program
+  .slick-slide.slick-active.slick-current
+  .item-slide-program:hover {
   transform-origin: left;
 }
 
 @media screen and (max-width: 768px) {
-  .slide-program-content  {
+  .slide-program-content {
     opacity: 1;
     visibility: visible;
   }
@@ -72,18 +68,15 @@ a {
   }
 }
 
-
-
-
-
-
+.padding-container {
+  @apply px-6  md:px-[5%] xl:px-[8%] 2xl:px-[10%];
+}
 
 .slide-logo .slick-arrow.slick-prev {
   position: absolute;
   bottom: 0;
   left: 0;
 }
-
 
 .slick-track {
   display: flex;
@@ -96,11 +89,14 @@ a {
 }
 
 .border-gradient-count-down {
-  border-image-source: linear-gradient(28.57deg, #FFFF00 16.12%, #FDE605 28.05%, #F7A613 53.42%, #F15A24 81.2%);
+  border-image-source: linear-gradient(
+    28.57deg,
+    #ffff00 16.12%,
+    #fde605 28.05%,
+    #f7a613 53.42%,
+    #f15a24 81.2%
+  );
 }
-
 
 .slick-title-item-program {
-  
 }
-

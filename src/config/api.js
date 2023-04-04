@@ -31,6 +31,7 @@ function postApi(path, data, options = {}) {
     ...defaultOptions,
     ...options,
     headers: {
+      'content-type': 'application/json',
       ...options.headers,
     },
   });

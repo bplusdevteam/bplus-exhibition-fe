@@ -38,6 +38,15 @@ export default function CountDownCircle({
   const timeCounts = useCountdown(time);
   const totalSeconds = configType.baseNumberRay * timeCounts[indexConfigType];
   let rot = 0;
+  const formatNumberTime = (number) => {
+    if (number < 0) {
+      return `00`;
+    }
+    if (number < 10) {
+      return `0${Math.floor(number)}`;
+    }
+    return Math.floor(number);
+  };
 
   return (
     <div className="relative m-2">
@@ -45,7 +54,7 @@ export default function CountDownCircle({
         className="w-[130px] h-[130px] ml-6 rounded-full border-[8px] border-[#fff] relative"
         style={{
           transform: `rotate(${
-            Math.floor(totalSeconds) * configType.rotate
+            Math.floor(totalSeconds < 0 ? 0 : totalSeconds) * configType.rotate
           }deg)`,
         }}
       >
@@ -55,7 +64,7 @@ export default function CountDownCircle({
       <div className="w-[130px] top-0 -translate-y-[2px] -rotate-[98deg] h-[130px] rounded-full ml-6 absolute">
         <div className="absolute w-full h-full top-0 rotate-[98deg] flex items-center justify-center ">
           <span className="text-[50px] text-[#E5DBBD]">
-            {Math.floor(timeCounts[indexConfigType])}
+            {formatNumberTime(timeCounts[indexConfigType])}
           </span>
         </div>
         {Array(80)

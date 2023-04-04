@@ -10,6 +10,7 @@ export default function ButtonCustom({
   children,
   onClick = () => {},
   type = "primary",
+  buttonType="button"
 }) {
   const bg = type === "primary" ? "bg-[#7854F7]" : "bg-[#000000]";
   return (
@@ -19,6 +20,7 @@ export default function ButtonCustom({
       size={size}
       fullWidth={fullWidth}
       onClick={onClick}
+      type={buttonType}
     >
       {children}
     </Button>

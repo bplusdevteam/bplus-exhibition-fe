@@ -1,4 +1,5 @@
 import ContainerBg from "@/components/common/ContainerBg";
+import ListDot from "@/components/common/ListDot";
 import { getUrlImage } from "@/utils/utils";
 import Image from "next/image";
 import { useRef } from "react";
@@ -39,11 +40,11 @@ export default function SectionLogo({ logoContent }) {
   return (
     <ContainerBg
       bgMargin="left"
-      className="my-14 pt-12 pb-8 md:pb-10 xl:pb-16 overflow-hidden"
+      className="my-14 pt-12 pb-8 md:pb-10 xl:pb-16 "
       classNameChild="!pr-0"
       classNameBg="h-full"
     >
-      <div className="">
+      <div className=" relative">
         <h1 className="text-3xl text-[600] uppercase md:pl-[180px] text-right mr-4 md:mr-0 md:text-left">
           sponsor logo
         </h1>
@@ -91,6 +92,7 @@ export default function SectionLogo({ logoContent }) {
             alt=""
           />
         </div>
+        <ListDot className="absolute top-[-150px] right-[100px]" type="horizontal"/>
       </div>
     </ContainerBg>
   );
