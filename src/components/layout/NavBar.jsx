@@ -5,10 +5,13 @@ import Logo from "../../assets/image/logo.svg";
 import Instagram from "../../assets/image/intagram.svg";
 import Facebook from "../../assets/image/facebook.svg";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function NavBar() {
   const [navbar, setNavbar] = useState(false);
   const [activeIndex, setActiveIndex] = useState(null);
+  const router = useRouter();
+
   useEffect(() => {
     const html = document.getElementsByTagName("html")[0];
     if (navbar) {
@@ -51,7 +54,7 @@ export default function NavBar() {
         },
         {
           name: "GALA DINNER",
-          url: "#",
+          url: "/Program/GalaDinner",
           parentId: 2,
         },
       ],
@@ -64,7 +67,7 @@ export default function NavBar() {
     {
       id: 4,
       name: "ART GALLERY",
-      url: "#",
+      url: "/ArtGallery",
     },
   ];
 
@@ -107,14 +110,16 @@ export default function NavBar() {
         >
           <ul className="flex flex-col px-0 lg:px-8 mt-14 mr-0 xl:mr-20 md:w-auto  md:flex-row md:space-x-8 md:mt-0 md:text-sm space-y-10 md:space-y-0 ">
             {navbars?.map((menu, menuIndex) => (
-              <Link href={menu.url}
+              <li
                 key={menuIndex}
-                className="relative  flex flex-col text-black md:cursor-pointer select-none "
-                // onClick={() => {
-                //   setActiveIndex(menuIndex === activeIndex ? null : menuIndex);
-                // }}
+                className="relative flex flex-col text-black md:cursor-pointer select-none  navbar-item "
+                onClick={() => {
+                  if (menu?.url) {
+                    router.push(menu?.url);
+                  }
+                }}
               >
-                <div className="flex ">
+                <div className="flex  ">
                   <span className="leading-5 text-base">{menu?.name}</span>
                   {menu?.child && (
                     <svg
@@ -132,21 +137,28 @@ export default function NavBar() {
                     </svg>
                   )}
                 </div>
-                {menu?.child && activeIndex === menuIndex && (
-                  <div className="z-10 relative md:absolute bg-[#EAEAEA] md:top-8  font-normal   md:w-[160px] w-auto rounded-[10px]">
-                    <ul className="text-sm">
-                      {menu?.child.map((menuChild) => (
-                        <li
-                          key={menuChild.name}
-                          className="block text-sm px-4 py-3 md:cursor-pointer hover:bg-slate-200 text-black  first:rounded-t-[10px] last:rounded-b-[10px]"
-                        >
-                          {menuChild?.name}
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </Link>
+                {/* {menu?.child && activeIndex === menuIndex && ( */}
+                <div className="z-10  font-normal w-auto navbar-item-child">
+                  <div className="w-full h-4 absolute  z-20"></div>
+                  <ul className="text-sm relative md:absolute mt-4 bg-[#EAEAEA] rounded-[10px]  md:w-[160px]">
+                    {menu?.child?.map((menuChild) => (
+                      <li
+                        key={menuChild.name}
+                        className="block text-sm px-4 py-3 md:cursor-pointer hover:bg-slate-200 text-black  first:rounded-t-[10px] last:rounded-b-[10px]  "
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          if (menuChild?.url) {
+                            router.push(menuChild?.url);
+                          }
+                        }}
+                      >
+                        {menuChild?.name}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+                {/* )} */}
+              </li>
             ))}
           </ul>
           <div className="md:flex gap-x-2 hidden w-fit md:mt-4 lg:mt-0">

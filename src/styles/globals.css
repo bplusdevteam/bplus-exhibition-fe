@@ -98,5 +98,10 @@ a {
   );
 }
 
-.slick-title-item-program {
+.navbar-item:hover .navbar-item-child {
+  display: block;
+}
+
+.navbar-item-child {
+  display: none;
 }

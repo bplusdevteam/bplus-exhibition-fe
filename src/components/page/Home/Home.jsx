@@ -18,7 +18,7 @@ export default function Home() {
   const getContentPage = async () => {
     try {
       setIsLoading(true);
-      const promisePage = Api.get("/pages/64089aacbe9c9f2b1eb86dd5");
+      const promisePage = Api.get("/pages/643103d4c1f32b0024a27941");
       const promiseOrator = Api.get("/orators");
       // eslint-disable-next-line no-undef
       const [responsePage, responseOrator] = await Promise.all([
@@ -38,15 +38,32 @@ export default function Home() {
   const contentHeader = pageContent?.settings?.find(
     (item) => item?.name === "HEADER_CONTENT"
   );
-  const videoHeader = pageContent?.settings?.find(
-    (item) => item?.name === "HEADER_VIDEO_URL"
-  );
+  const videoHeader =
+    pageContent?.settings?.find((item) => item?.name === "HEADER_VIDEO_URL") ||
+    {};
   const contentCountdown = pageContent?.settings?.find(
     (item) => item?.name === "COUNT_DOWN_END"
   );
   const logoContent = pageContent?.settings?.find(
     (item) => item?.name === "SPONSO_LOGO"
   );
+  let urlYoutube = "";
+  const YOUTUBE_URL_EMBED = "https://youtube.com/embed/";
+
+  if (videoHeader?.textValue) {
+    if (videoHeader?.textValue.includes("/watch?v=")) {
+      urlYoutube = videoHeader?.textValue?.replace(
+        /^.*\/watch\?v=/i,
+        YOUTUBE_URL_EMBED
+      );
+    } else {
+      const lastSlashIndex = videoHeader?.textValue?.lastIndexOf("/");
+      urlYoutube = [
+        YOUTUBE_URL_EMBED,
+        videoHeader?.textValue.slice(lastSlashIndex + 1),
+      ].join("");
+    }
+  }
 
   return (
     <Layout isLoading={isLoading}>
@@ -63,18 +80,27 @@ export default function Home() {
               __html: contentHeader?.textValue?.replace(/\n/g, ""),
             }}
           />
+          {/* <div>
+            <p className="home-title-content-header">Building exactly the eCommerce website you want.</p>
+            <span className="home-des-content-header">
+              WooCommerce is a customizable, open-source eCommerce platform
+              built on WordPress. Get started quickly and make your way.
+            </span>
+          </div> */}
           <ButtonCustom className="mt-6 md:mt-12 2xl:mt-14 w-[267px] text-base self-center md:self-auto">
             Start video
           </ButtonCustom>
         </div>
         <div className="w-full md:w-[60%]">
-          <video
-            src={videoHeader?.textValue || videoHeader?.MediaValue || ""}
-            controls="controls"
+          <iframe
+            title="youtube"
+            width="100%"
             className="align-baseline w-full aspect-[887/556] rounded-[10px]"
-          ></video>
+            src={urlYoutube}
+            allowFullScreen
+          />
         </div>
-        <ListDot className="absolute bottom-[30px] right-[60px]"/>
+        <ListDot className="absolute bottom-[30px] right-[60px]" />
       </div>
       <SectionCountDown contentCountdown={contentCountdown} />
       <div className="flex w-full justify-center mt-8 xl:mt-14">

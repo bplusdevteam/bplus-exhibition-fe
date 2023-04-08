@@ -18,7 +18,7 @@ export default function SectionOrators({ orators }) {
           MAIN STAGE HIGHLIGHTS
         </h1>
       </div>
-      <div className="flex flex-wrap gap-6 sm:gap-y-12 sm:gap-x-16  justify-center sm:justify-start mt-4 max-w-[1030px]">
+      <div className="flex flex-wrap gap-6 sm:gap-y-12 sm:gap-x-16  justify-center sm:justify-start mt-4 max-w-[1030px] w-full">
         {orators?.map((item, index) => (
           <div
             key={index}

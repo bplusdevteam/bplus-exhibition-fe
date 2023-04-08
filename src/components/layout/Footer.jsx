@@ -22,7 +22,7 @@ export default function Footer() {
     const res = await Api.get("/footer");
     setDataFooter(res?.data);
   };
-  
+
   useEffect(() => {
     getInfoMap();
   }, [dataFooter]);
@@ -39,6 +39,12 @@ export default function Footer() {
           alt="logo-bplush"
           className="max-w-[200px]"
         />
+        <div
+          dangerouslySetInnerHTML={{
+            __html: dataFooter?.textValueLeft?.replace(/\n/g, ""),
+          }}
+        />
+        {/*         
         <p className="my-4 md:my-8">
           Bplusfurniture is one of the fastest-growing eCommerce communities.
           We’re proud that the helpfulness of the community and a wealth of
@@ -46,13 +52,10 @@ export default function Footer() {
         </p>
         <span>Email: bplusfurniture@info.com</span>
         <span>Hotline: 0908 999 999</span>
-        <span>Website: www.bplusfurniture.com.vn</span>
+        <span>Website: www.bplusfurniture.com.vn</span> */}
       </div>
       <div className="w-full md:w-[500px] h-[250px] md:h-[300px] mt-4 md:mt-0 rounded-[10px] overflow-hidden">
-        <MyMapComponent
-          // isMarkerShown
-          position={infoAddress?.geometry?.location}
-        />
+        <MyMapComponent position={infoAddress?.geometry?.location} />
       </div>
     </footer>
   );

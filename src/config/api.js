@@ -74,9 +74,8 @@ axios.interceptors.response.use(
     return { ...response, data };
   },
   (error) => {
-    const errorResponse = error.response;
-
-    return errorResponse;
+    // eslint-disable-next-line no-undef
+    return Promise.reject(error);
   }
 );
 

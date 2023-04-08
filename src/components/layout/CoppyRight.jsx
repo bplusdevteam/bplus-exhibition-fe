@@ -8,11 +8,11 @@ import Api from "@/config/api";
 import { getUrlImage } from "@/utils/utils";
 
 export default function CoppyRight() {
-  const [socias, setSocias] = useState();
+  const [socials, setSocials] = useState([]);
 
   const getSocias = async () => {
-    const res = await Api.get("/socias");
-    setSocias(res?.data);
+    const res = await Api.get("/socials");
+    setSocials(res?.data);
   };
 
   useEffect(() => {
@@ -23,7 +23,7 @@ export default function CoppyRight() {
     <>
       <div className="py-2 md:py-4 flex-row-reverse md:flex-row bg-white flex justify-between items-center px-2 md:px-[5%] xl:px-[8%] 2xl:px-[10%] relative">
         <div className="flex space-x-2 ld:space-x-6">
-          {socias?.map((item, index) => (
+          {socials?.map((item, index) => (
             <img
               className="w-5 h-5 object-contain"
               key={index}
