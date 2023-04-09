@@ -23,8 +23,6 @@ export default function GalaDinner() {
     getContentPage();
   }, []);
 
-  console.log("pageContent", pageContent);
-
   const topPage = pageContent?.settings?.find(
     (item) => item?.name === "TOP_PAGE_GALA"
   );

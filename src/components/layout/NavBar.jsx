@@ -6,70 +6,29 @@ import Instagram from "../../assets/image/intagram.svg";
 import Facebook from "../../assets/image/facebook.svg";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Api from "@/config/api";
 
 export default function NavBar() {
-  const [navbar, setNavbar] = useState(false);
-  const [activeIndex, setActiveIndex] = useState(null);
   const router = useRouter();
+  const [showNavbar, setShowNavbar] = useState(false);
+  const [navbars, setNavbars] = useState([]);
+
+  const getContentPage = async () => {
+    const response = await Api.get("/headers");
+    setNavbars(response?.data);
+  };
+  useEffect(() => {
+    getContentPage();
+  }, []);
 
   useEffect(() => {
     const html = document.getElementsByTagName("html")[0];
-    if (navbar) {
+    if (showNavbar) {
       html.style.overflowY = "hidden";
     } else {
       html.style.overflowY = "auto";
     }
-  }, [navbar]);
-
-  const navbars = [
-    {
-      id: 1,
-      name: "CÂU CHUYỆN B+",
-      url: "/Story",
-    },
-    {
-      id: 2,
-      name: "CHƯƠNG TRÌNH",
-      url: "/Program",
-      child: [
-        {
-          name: "OPENING",
-          url: "#",
-          parentId: 2,
-        },
-        {
-          name: "SHOWTIME",
-          url: "#",
-          parentId: 2,
-        },
-        {
-          name: "TALKSHOW",
-          url: "#",
-          parentId: 2,
-        },
-        {
-          name: "WORKSHOP",
-          url: "/Program/WorkShop",
-          parentId: 2,
-        },
-        {
-          name: "GALA DINNER",
-          url: "/Program/GalaDinner",
-          parentId: 2,
-        },
-      ],
-    },
-    {
-      id: 3,
-      name: "CUỘC THI",
-      url: "/Competition",
-    },
-    {
-      id: 4,
-      name: "ART GALLERY",
-      url: "/ArtGallery",
-    },
-  ];
+  }, [showNavbar]);
 
   return (
     <nav className=" bg-white md:h-[210px] flex items-center  shadow-sm">
@@ -85,7 +44,7 @@ export default function NavBar() {
           <div
             className="block md:hidden"
             onClick={() => {
-              setNavbar(!navbar);
+              setShowNavbar(!showNavbar);
             }}
           >
             <svg
@@ -105,7 +64,7 @@ export default function NavBar() {
         </div>
         <div
           className={`flex justify-center md:flex-col md:items-end lg:flex-row lg:items-center z-50  w-full md:flex md:w-[76%] ${
-            navbar ? "" : "hidden"
+            showNavbar ? "" : "hidden"
           } h-[calc(100vh-56px)] fixed md:relative md:h-auto bg-white top-[56px] md:top-0 `}
         >
           <ul className="flex flex-col px-0 lg:px-8 mt-14 mr-0 xl:mr-20 md:w-auto  md:flex-row md:space-x-8 md:mt-0 md:text-sm space-y-10 md:space-y-0 ">
@@ -114,14 +73,14 @@ export default function NavBar() {
                 key={menuIndex}
                 className="relative flex flex-col text-black md:cursor-pointer select-none  navbar-item "
                 onClick={() => {
-                  if (menu?.url) {
-                    router.push(menu?.url);
+                  if (menu?.Path) {
+                    router.push(menu?.Path);
                   }
                 }}
               >
                 <div className="flex  ">
-                  <span className="leading-5 text-base">{menu?.name}</span>
-                  {menu?.child && (
+                  <span className="leading-5 text-base">{menu?.Name}</span>
+                  {menu?.children && (
                     <svg
                       className="w-5 h-5 ml-1"
                       aria-hidden="true"
@@ -141,18 +100,18 @@ export default function NavBar() {
                 <div className="z-10  font-normal w-auto navbar-item-child">
                   <div className="w-full h-4 absolute  z-20"></div>
                   <ul className="text-sm relative md:absolute mt-4 bg-[#EAEAEA] rounded-[10px]  md:w-[160px]">
-                    {menu?.child?.map((menuChild) => (
+                    {menu?.children?.map((menuChild) => (
                       <li
-                        key={menuChild.name}
+                        key={menuChild.Name}
                         className="block text-sm px-4 py-3 md:cursor-pointer hover:bg-slate-200 text-black  first:rounded-t-[10px] last:rounded-b-[10px]  "
                         onClick={(e) => {
                           e.stopPropagation();
-                          if (menuChild?.url) {
-                            router.push(menuChild?.url);
+                          if (menuChild?.Path) {
+                            router.push(menuChild?.Path);
                           }
                         }}
                       >
-                        {menuChild?.name}
+                        {menuChild?.Name}
                       </li>
                     ))}
                   </ul>
