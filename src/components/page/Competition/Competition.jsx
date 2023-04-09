@@ -15,7 +15,7 @@ export default function Competition() {
   const getContentPage = async () => {
     try {
       setIsLoading(true);
-      const responsePage = await Api.get("/pages/641fe993aa00af1e9a83c3bc");
+      const responsePage = await Api.get("/pages/643147d3c1f32b0024a279aa");
       setPageContent(responsePage?.data);
     } finally {
       setIsLoading(false);
@@ -40,6 +40,12 @@ export default function Competition() {
     (item) => item?.name === "BOTTOM_CONTENT_COMPETITION"
   );
 
+  let stepsCompetition = [];
+  if (industrialContent?.textValue) {
+    stepsCompetition =
+      industrialContent && JSON.parse(industrialContent?.textValue);
+  }
+
   return (
     <Layout isLoading={isLoading}>
       <TopPage topPageContent={topPage} />
@@ -50,14 +56,14 @@ export default function Competition() {
           classNameBg=" mr-0"
           classNameChild={`flex flex-col md:flex-row flex-wrap  w-full  gap-y-10`}
         >
-          <div className="flex flex-col w-full md:w-[550px] items-end">
+          <div className="flex flex-col w-full md:w-[530px] items-end -mt-10 mr-6">
             <div className="relative">
               <img
-                className="w-[320px]"
+                className="w-[320px] h-[550px]"
                 src={getUrlImage(industrialContent?.mediaValue[0]?.url)}
                 alt=""
               />
-              <div className="absolute bottom-0 bg-[#999FE3] w-[300px] h-[300px] -z-10 rounded-sm"></div>
+              <div className="absolute bottom-0 bg-[#999FE3] w-[280px] h-[300px] -z-10 rounded-sm"></div>
             </div>
             <div className=" relative w-full z-10 md:-mt-[80px] pl-8">
               <img
@@ -76,14 +82,33 @@ export default function Competition() {
               <div className="absolute bottom-0 bg-[#F47B9E] w-[200px] h-[180px] -z-10 rounded-sm"></div>
             </div>
           </div>
-          <div
+          {/* <div
             className="md:mt-[100px] md:px-10 flex-1"
             dangerouslySetInnerHTML={{
               __html: industrialContent?.textValue?.replace(/\n/g, ""),
             }}
-          />
-          <PlusBg className="absolute bottom-0 right-[100px]"/>
-
+          /> */}
+          <div className="md:mt-[80px] md:px-10 flex-1 max-w-[600px]">
+            <p className="title-primary uppercase text-4xl">Industrial DESIGN</p>
+            {stepsCompetition?.map((item, index) => (
+              <div className=" flex border-b-[#ccc] border-b py-8" key={index}>
+                <div className="w-12 h-12 rounded mr-8"
+                  style={{
+                    backgroundColor: item?.color
+                  }}
+                />
+                <div className=" flex-1">
+                  <h2 className="text-[#1E266D] font-bold mb-3">
+                    {item?.name}
+                  </h2>
+                  <span className="text-[#455880] text-sm">
+                    {item?.description}
+                  </span>
+                </div>
+              </div>
+            ))}
+          </div>
+          <PlusBg className="absolute bottom-0 right-[100px]" />
         </ContainerBg>
       </div>
       <div className="padding-container">
@@ -100,7 +125,11 @@ export default function Competition() {
           </div>
         </div>
         <div className="flex mb-[100px] gap-x-20 flex-col md:flex-row ">
-          <img className="max-h-[320px] w-full  md:w-[40%]" src={getUrlImage(bottomContent?.mediaValue[0]?.url)} alt="" />
+          <img
+            className="max-h-[320px] mt-4 w-full  md:w-[40%]"
+            src={getUrlImage(bottomContent?.mediaValue[0]?.url)}
+            alt=""
+          />
           <div
             className="w-full md:w-[60%] mt-6 md:mt-0"
             dangerouslySetInnerHTML={{

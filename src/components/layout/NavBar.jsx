@@ -49,7 +49,7 @@ export default function NavBar() {
         },
         {
           name: "WORKSHOP",
-          url: "#",
+          url: "/Program/WorkShop",
           parentId: 2,
         },
         {
@@ -62,7 +62,7 @@ export default function NavBar() {
     {
       id: 3,
       name: "CUỘC THI",
-      url: "#",
+      url: "/Competition",
     },
     {
       id: 4,

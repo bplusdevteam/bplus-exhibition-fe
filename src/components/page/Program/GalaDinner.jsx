@@ -13,7 +13,7 @@ export default function GalaDinner() {
   const getContentPage = async () => {
     try {
       setIsLoading(true);
-      const responsePage = await Api.get("/pages/641c6116c9400103df954ea0");
+      const responsePage = await Api.get("/pages/643144b8c1f32b0024a2798b");
       setPageContent(responsePage?.data);
     } finally {
       setIsLoading(false);
@@ -29,12 +29,12 @@ export default function GalaDinner() {
     (item) => item?.name === "TOP_PAGE_GALA"
   );
   const contentFirst = pageContent?.settings?.find(
-    (item) => item?.name === "GALA_CONTENT_FIRST"
+    (item) => item?.name === "GALA_STEPS"
   );
   const listContent = pageContent?.settings?.filter(
     (item) => item?.group === "GALA_CONTENT"
   );
-  const listTextOfFirstContent= contentFirst?.textValue?.split("/");
+  const listTextOfFirstContent= contentFirst?.textValue?.split("//");
 
   return (
     <Layout isLoading={isLoading}>

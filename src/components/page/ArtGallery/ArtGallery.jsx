@@ -13,7 +13,7 @@ export default function ArtGallery() {
   const getContentPage = async () => {
     try {
       setIsLoading(true);
-      const responsePage = await Api.get("/pages/641c6f15c9400103df954eaf");
+      const responsePage = await Api.get("/pages/64325beac1f32b0024a279cf");
       setPageContent(responsePage?.data);
     } finally {
       setIsLoading(false);
@@ -30,11 +30,6 @@ export default function ArtGallery() {
     (item) => item?.group === "ARTGALLERY_CONTENT"
   );
 
-  let listContenttemp;
-  if (listContent?.length) {
-    listContenttemp = Array(4).fill(listContent[0]);
-  }
-
   return (
     <Layout isLoading={isLoading}>
       <TopPage topPageContent={topPage} />
@@ -45,15 +40,15 @@ export default function ArtGallery() {
           classNameBg=" mr-0"
           classNameChild={`flex flex-col md:flex-row flex-wrap justify-between w-full mt-[100px] gap-y-10`}
         >
-          {listContenttemp?.map((item, index) => (
+          {listContent?.map((item, index) => (
             <div key={index} className="w-full md:w-[48%]  ">
               <img
-                className="w-full  object-cover object-center  "
+                className="w-full  object-cover object-center   "
                 src={getUrlImage(item?.mediaValue[0]?.url)}
                 alt=""
               />
               <div
-                className="mt-6"
+                className="mt-4"
                 dangerouslySetInnerHTML={{
                   __html: item?.textValue?.replace(/\n/g, ""),
                 }}

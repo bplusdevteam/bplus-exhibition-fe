@@ -13,7 +13,7 @@ export default function WorkShop() {
   const getContentPage = async () => {
     try {
       setIsLoading(true);
-      const responsePage = await Api.get("/pages/641c55c91965c682f9eb1079");
+      const responsePage = await Api.get("/pages/643145f9c1f32b0024a2799c");
       setPageContent(responsePage?.data);
     } finally {
       setIsLoading(false);
@@ -33,7 +33,7 @@ export default function WorkShop() {
   return (
     <Layout isLoading={isLoading}>
       <TopPage topPageContent={topPage} />
-      <div className="mb-[100px]">
+      <div className="mb-[100px] ">
         {listContent?.map((item, index) => (
           <ContainerBg
             key={index}

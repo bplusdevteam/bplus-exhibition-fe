@@ -55,7 +55,9 @@ export default function Footer() {
         <span>Website: www.bplusfurniture.com.vn</span> */}
       </div>
       <div className="w-full md:w-[500px] h-[250px] md:h-[300px] mt-4 md:mt-0 rounded-[10px] overflow-hidden">
-        <MyMapComponent position={infoAddress?.geometry?.location} />
+        {infoAddress && (
+          <MyMapComponent position={infoAddress?.geometry?.location} />
+        )}
       </div>
     </footer>
   );

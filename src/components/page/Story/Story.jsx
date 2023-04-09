@@ -15,7 +15,7 @@ export default function Story() {
   const getContentPage = async () => {
     try {
       setIsLoading(true);
-      const responsePage = await Api.get("/pages/6415a8d9c8f7400aebc93e5a");
+      const responsePage = await Api.get("/pages/6431169cc1f32b0024a27974");
       setPageContent(responsePage?.data);
     } finally {
       setIsLoading(false);
@@ -29,13 +29,13 @@ export default function Story() {
     (item) => item?.name === "TOP_PAGE"
   );
   const listStory = pageContent?.settings?.filter(
-    (item) => item?.group === "STORY"
+    (item) => item?.group === "STORY_CONTENT"
   );
 
   return (
     <Layout isLoading={isLoading}>
       <TopPage topPageContent={topPage} />
-      <div className="mb-[100px]">
+      <div className="mb-[100px] ">
         {listStory?.map((item, index) => (
           <ContainerBg
             key={index}
