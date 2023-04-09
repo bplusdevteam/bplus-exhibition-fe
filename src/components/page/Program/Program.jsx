@@ -18,7 +18,7 @@ export default function Program() {
   const getContentPage = async () => {
     try {
       setIsLoading(true);
-      const promisePage = Api.get("/pages/6416b7329643642c7fd45830");
+      const promisePage = Api.get("/pages/64325f4dc1f32b0024a279f1");
       const promiseProgram = Api.get("/programs");
       // eslint-disable-next-line no-undef
       const [responsePage, responseProgram] = await Promise.all([
@@ -36,13 +36,8 @@ export default function Program() {
   }, []);
 
   const topPage = pageContent?.settings?.find(
-    (item) => item?.name === "TOP_PAGE_PROGRAM"
+    (item) => item?.name === "TOP_PAGE_PROGRAMS"
   );
-
-  let programsTemp;
-  if (programs) {
-    programsTemp = Array(6).fill(programs[0]);
-  }
 
   const sliderRef = useRef();
   var settings = {
@@ -80,6 +75,8 @@ export default function Program() {
       },
     ],
   };
+  console.log("prog", programs);
+
   return (
     <Layout isLoading={isLoading}>
       <TopPage topPageContent={topPage} />
@@ -98,10 +95,10 @@ export default function Program() {
             nextArrow={<></>}
             useTransform={true}
           >
-            {programsTemp?.map((item, index) => (
+            {programs?.map((item, index) => (
               <div
                 key={index}
-                className="!w-[90%] md:!w-[210px] h-[500px] lg:h-[700px] relative cursor-pointer item-slide-program"
+                className="!w-[90%] md:!w-[220px] h-[500px] lg:h-[650px] relative cursor-pointer item-slide-program"
               >
                 <img
                   className="w-full h-full object-cover object-center "
@@ -116,16 +113,16 @@ export default function Program() {
                   }}
                 ></div>
                 <div className="absolute bottom-0  p-6 slide-program-content">
-                  <div
-                    className=""
-                    dangerouslySetInnerHTML={{
-                      __html: item?.textValue?.replace(/\n/g, ""),
-                    }}
-                  />
+                  <h2 className="uppercase font-bold ">{item?.name}</h2>
+                  <p className="text-sm mt-5">{item?.textValue}</p>
                   <ButtonCustom
                     type="secondary"
                     className="my-10 w-[130px] !h-[42px] text-sm !px-2"
                     onClick={() => {
+                      if (item.slugPageDetail) {
+                        router.push(item.slugPageDetail);
+                        return;
+                      }
                       router.push(`Program/${item.id}`);
                     }}
                   >
