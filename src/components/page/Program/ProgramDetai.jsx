@@ -7,6 +7,7 @@ import ContainerBg from "@/components/common/ContainerBg";
 import TopPage from "@/components/pageComponents/TopPage";
 import { useRouter } from "next/router";
 import ModalQuestionOrators from "./components/ModalQuestionOrators";
+import ButtonCustom from "@/components/common/ButtonCustom";
 
 export default function ProgramDetail() {
   const [programDetail, setProgramDetail] = useState();
@@ -66,9 +67,7 @@ export default function ProgramDetail() {
                 } `}
               >
                 <span className="text-2xl">Talkshow 01 / 18-03-23</span>
-                <h2 className="uppercase text-3xl font-bold">
-                  Industrial in the future
-                </h2>
+                <h2 className="uppercase text-3xl font-bold">{item?.name}</h2>
               </div>
               <div
                 className={`flex flex-col ${
@@ -92,12 +91,16 @@ export default function ProgramDetail() {
                     />
                   ))}
                 </div>
-                <div
-                  className="flex-1 md:max-w-[40%] max-w-full"
-                  dangerouslySetInnerHTML={{
-                    __html: item?.textValue?.replace(/\n/g, ""),
-                  }}
-                />
+                <div className="flex-1 md:max-w-[40%] max-w-full flex flex-col items-center">
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: item?.textValue?.replace(/\n/g, ""),
+                    }}
+                  />
+                  <ButtonCustom size="sm" className="md:h-12 mt-6">
+                    Đăng kí tham dự triễn lãm
+                  </ButtonCustom>
+                </div>
               </div>
             </ContainerBg>
           ))}
