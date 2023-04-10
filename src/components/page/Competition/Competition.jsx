@@ -131,7 +131,7 @@ export default function Competition() {
             alt=""
           />
           <div
-            className="w-full md:w-[60%] mt-6 md:mt-0"
+            className="w-full md:w-[60%] mt-6 md:mt-0 whitespace-pre-line"
             dangerouslySetInnerHTML={{
               __html: bottomContent?.textValue?.replace(/\n/g, ""),
             }}

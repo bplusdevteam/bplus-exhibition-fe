@@ -1,14 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 import { getUrlImage } from "@/utils/utils";
+import Image from "next/image";
 import ButtonCustom from "../common/ButtonCustom";
 import ListDot from "../common/ListDot";
 
 export default function TopPage({ topPageContent, onClickBtn }) {
   return (
     <div className="w-full h-[400px]  md:h-[500px] relative flex items-center  flex-col">
-      <img
+      <Image
         className="absolute mix-blend-multiply -z-10 w-full h-full object-cover object-center"
         src={getUrlImage(topPageContent?.mediaValue[0]?.url)}
+        fill="fill"
+        placeholder="blur"
+        blurDataURL={`/_next/image?url=${getUrlImage(topPageContent?.mediaValue[0]?.url)}&w=16&q=1`}
         alt=""
       />
       <div className="absolute mix-blend-multiply -z-10 w-full h-full bg-[#8C8C8C]"></div>
