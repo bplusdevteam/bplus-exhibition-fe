@@ -101,7 +101,7 @@ export default function Competition() {
                   <h2 className="text-[#1E266D] font-bold mb-3">
                     {item?.name}
                   </h2>
-                  <span className="text-[#455880] text-sm">
+                  <span className="text-[#455880] text-sm whitespace-pre-line">
                     {item?.description}
                   </span>
                 </div>
