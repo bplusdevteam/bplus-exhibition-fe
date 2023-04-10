@@ -2,23 +2,28 @@
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import Logo from "../../assets/image/logo.svg";
-import Instagram from "../../assets/image/intagram.svg";
-import Facebook from "../../assets/image/facebook.svg";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import Api from "@/config/api";
+import { getUrlImage } from "@/utils/utils";
 
 export default function NavBar() {
   const router = useRouter();
   const [showNavbar, setShowNavbar] = useState(false);
+  const [socials, setSocials] = useState([]);
   const [navbars, setNavbars] = useState([]);
 
   const getContentPage = async () => {
     const response = await Api.get("/headers");
     setNavbars(response?.data);
   };
+  const getSocias = async () => {
+    const res = await Api.get("/socias");
+    setSocials(res?.data);
+  };
   useEffect(() => {
     getContentPage();
+    getSocias();
   }, []);
 
   useEffect(() => {
@@ -31,13 +36,13 @@ export default function NavBar() {
   }, [showNavbar]);
 
   return (
-    <nav className=" bg-white md:h-[210px] flex items-center  shadow-sm">
+    <nav className=" bg-white md:h-[180px] flex items-center  shadow-sm">
       <div className="container flex flex-col md:flex-row  items-center justify-between mx-auto">
         <div className="flex justify-between w-full md:w-auto  py-3 px-6 md:px-0">
           <Link href="/" className="flex items-center">
             <Image
               src={Logo}
-              className="w-[60px] md:w-auto"
+              className="w-[50px] md:w-auto"
               alt="logo-b-plus"
             />
           </Link>
@@ -121,9 +126,16 @@ export default function NavBar() {
             ))}
           </ul>
           <div className="md:flex gap-x-2 hidden w-fit md:mt-4 lg:mt-0">
-            <Image src={Instagram} alt="logo-b-plus" />
-            <Image src={Facebook} alt="logo-b-plus" />
-            <Image src={Instagram} alt="logo-b-plus" />
+            {socials?.map((item, index) => (
+              <a href={item?.sociaUrl} key={index} target="_blank">
+                <img
+                  className="w-6 h-6 object-contain"
+                  key={index}
+                  src={getUrlImage(item?.iconPrymary?.url)}
+                  alt=""
+                />
+              </a>
+            ))}
           </div>
         </div>
       </div>
