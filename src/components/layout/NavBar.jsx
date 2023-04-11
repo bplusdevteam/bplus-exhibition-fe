@@ -12,6 +12,7 @@ export default function NavBar() {
   const [showNavbar, setShowNavbar] = useState(false);
   const [socials, setSocials] = useState([]);
   const [navbars, setNavbars] = useState([]);
+  console.log("navbars", navbars);
 
   const getContentPage = async () => {
     const response = await Api.get("/headers");
@@ -85,7 +86,7 @@ export default function NavBar() {
               >
                 <div className="flex  ">
                   <span className="leading-5 text-base">{menu?.Name}</span>
-                  {menu?.children && (
+                  {menu?.children?.length > 0 && (
                     <svg
                       className="w-5 h-5 ml-1"
                       aria-hidden="true"

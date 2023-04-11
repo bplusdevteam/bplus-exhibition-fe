@@ -22,6 +22,10 @@ a {
   text-decoration: none;
 }
 
+ol, ul, menu {
+  list-style: inside !important;
+}
+
 .slick-slider {
   overflow: hidden;
 }
@@ -104,4 +108,24 @@ a {
 
 .navbar-item-child {
   display: none;
+}
+
+
+.markdown-competition h2 {
+  color: #1E266D;
+  font-weight: 700;
+  /* margin-bottom: 12px; */
+}
+.markdown-competition ul {
+  margin-top: 12px;
+  text-align: justify;
+
+}
+.markdown-competition u h3 {
+  font-weight: 500;
+  margin-top: 8px;
+}
+.markdown-competition a {
+  color: #d34a45;
+  font-weight: 500;
 }

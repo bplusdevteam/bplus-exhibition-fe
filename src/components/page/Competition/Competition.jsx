@@ -7,16 +7,21 @@ import ContainerBg from "@/components/common/ContainerBg";
 import TopPage from "@/components/pageComponents/TopPage";
 import ButtonCustom from "@/components/common/ButtonCustom";
 import PlusBg from "@/components/common/PlusBg";
+import ListDot from "@/components/common/ListDot";
+import Markdown from "markdown-to-jsx";
 
 export default function Competition() {
   const [pageContent, setPageContent] = useState();
+  const [competition, setCompetition] = useState();
   const [isLoading, setIsLoading] = useState(false);
 
   const getContentPage = async () => {
     try {
       setIsLoading(true);
       const responsePage = await Api.get("/pages/643147d3c1f32b0024a279aa");
+      const resCompetition = await Api.get("/competition");
       setPageContent(responsePage?.data);
+      setCompetition(resCompetition?.data);
     } finally {
       setIsLoading(false);
     }
@@ -40,12 +45,6 @@ export default function Competition() {
     (item) => item?.name === "BOTTOM_CONTENT_COMPETITION"
   );
 
-  let stepsCompetition = [];
-  if (industrialContent?.textValue) {
-    stepsCompetition =
-      industrialContent && JSON.parse(industrialContent?.textValue);
-  }
-
   return (
     <Layout isLoading={isLoading}>
       <TopPage topPageContent={topPage} />
@@ -56,7 +55,7 @@ export default function Competition() {
           classNameBg=" mr-0"
           classNameChild={`flex flex-col md:flex-row flex-wrap  w-full  gap-y-10`}
         >
-          <div className="flex flex-col w-full md:w-[530px] items-end -mt-10 mr-6">
+          <div className="flex flex-col w-full md:w-[530px] items-end -mt-10 mr-6 relative">
             <div className="relative">
               <img
                 className="w-[320px] h-[550px]"
@@ -81,29 +80,35 @@ export default function Competition() {
               />
               <div className="absolute bottom-0 bg-[#F47B9E] w-[200px] h-[180px] -z-10 rounded-sm"></div>
             </div>
+            <ListDot
+              className="absolute top-[720px] right-[30px]"
+              type="horizontal"
+            />
+            <div className="w-full mt-[130px] hidden lg:block">
+              {industrialContent?.mediaValue?.slice(3)?.map((item, index) => (
+                <img
+                  key={index}
+                  className="w-full mt-10 max-h-[1200px] object-contain"
+                  src={getUrlImage(item?.url)}
+                  alt=""
+                />
+              ))}
+            </div>
           </div>
-          {/* <div
-            className="md:mt-[100px] md:px-10 flex-1"
-            dangerouslySetInnerHTML={{
-              __html: industrialContent?.textValue?.replace(/\n/g, ""),
-            }}
-          /> */}
           <div className="md:mt-[80px] md:px-10 flex-1 max-w-[600px]">
-            <p className="title-primary uppercase text-4xl">Industrial DESIGN</p>
-            {stepsCompetition?.map((item, index) => (
+            <p className="title-primary uppercase text-4xl">
+              {competition?.Name}
+            </p>
+            {competition?.CompetitionContent?.map((item, index) => (
               <div className=" flex border-b-[#ccc] border-b py-8" key={index}>
-                <div className="w-12 h-12 rounded mr-8"
+                <div
+                  className="w-12 h-12 rounded mr-8"
                   style={{
-                    backgroundColor: item?.color
+                    backgroundColor: item?.color,
                   }}
                 />
-                <div className=" flex-1">
-                  <h2 className="text-[#1E266D] font-bold mb-3">
-                    {item?.name}
-                  </h2>
-                  <span className="text-[#455880] text-sm whitespace-pre-line">
-                    {item?.description}
-                  </span>
+                <div className=" flex-1 markdown-competition">
+                  <Markdown>{`${item?.content}`}</Markdown>
                 </div>
               </div>
             ))}

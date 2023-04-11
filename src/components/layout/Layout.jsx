@@ -21,7 +21,7 @@ export default function Layout({ children, isLoading }) {
           ready to register for the exhibition?
         </span>
         <ButtonCustom
-          className="w-full  max-w-[300px] lg:max-w-[400px] mt-4 lg:mt-0"
+          className="w-full  max-w-[400px] mt-4 lg:mt-0"
           type="secondary"
         >
           Đăng kí tham dự triễn lãm
