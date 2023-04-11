@@ -9,11 +9,13 @@ import ButtonCustom from "@/components/common/ButtonCustom";
 import PlusBg from "@/components/common/PlusBg";
 import ListDot from "@/components/common/ListDot";
 import Markdown from "markdown-to-jsx";
+import ModalRegisterCompetition from "./components/ModalRegisterCompetition";
 
 export default function Competition() {
   const [pageContent, setPageContent] = useState();
   const [competition, setCompetition] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [openModalRegister, setOpenModalRegister] = useState(false);
   const [settings, SetSettings] = useState([]);
 
   const getContentPage = async () => {
@@ -135,9 +137,19 @@ export default function Competition() {
             alt=""
           />
           <div className="w-full h-full absolute flex items-center justify-center z-10 top-0">
-            <ButtonCustom className="my-10">
+            <ButtonCustom
+              className="my-10"
+              onClick={() => setOpenModalRegister(true)}
+            >
               {settings[0]?.jsonValue?.btn_register_competition}
             </ButtonCustom>
+
+            <ModalRegisterCompetition
+              openModalRegister={openModalRegister}
+              onClose={() => {
+                setOpenModalRegister(false);
+              }}
+            />
           </div>
         </div>
         <div className="flex mb-[100px] gap-x-20 flex-col md:flex-row ">

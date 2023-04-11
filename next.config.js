@@ -6,7 +6,7 @@ const nextConfig = {
     KEY_MAP: process.env.KEY_MAP,
   },
   images: {
-    domains: ['api-exhibition.bplusfurniture.com.vn']
+    domains: ['api-exhibition.bplusfurniture.com.vn', 'localhost']
   }
 };
 
