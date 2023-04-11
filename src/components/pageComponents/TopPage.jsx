@@ -4,7 +4,7 @@ import Image from "next/image";
 import ButtonCustom from "../common/ButtonCustom";
 import ListDot from "../common/ListDot";
 
-export default function TopPage({ topPageContent, onClickBtn }) {
+export default function TopPage({ topPageContent, onClickBtn,buttonText }) {
   return (
     <div className="w-full h-[400px]  md:h-[500px] relative flex items-center  flex-col">
       <Image
@@ -26,7 +26,8 @@ export default function TopPage({ topPageContent, onClickBtn }) {
         className="!absolute bottom-[60px] md:bottom-[80px]"
         onClick={onClickBtn}
       >
-        Đăng kí tham dự triễn lãm
+        {buttonText || ""}
+       
       </ButtonCustom>
       <ListDot className="absolute bottom-[-80px] right-[100px]" />
     </div>

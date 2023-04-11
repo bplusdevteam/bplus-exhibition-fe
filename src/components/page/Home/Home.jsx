@@ -12,6 +12,7 @@ import ListDot from "@/components/common/ListDot";
 export default function Home() {
   const [pageContent, setPageContent] = useState();
   const [orators, setOrators] = useState();
+  const [settings, SetSettings] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [openModalRegister, setOpenModalRegister] = useState(false);
 
@@ -31,8 +32,15 @@ export default function Home() {
       setIsLoading(false);
     }
   };
+
+  const getSettings = async () => {
+    const res = await Api.get("/settings");
+    SetSettings(res?.data);
+  };
+
   useEffect(() => {
     getContentPage();
+    getSettings();
   }, []);
 
   const contentHeader = pageContent?.settings?.find(
@@ -66,7 +74,7 @@ export default function Home() {
   }
 
   return (
-    <Layout isLoading={isLoading}>
+    <Layout isLoading={isLoading} settings={settings}>
       <div
         className="w-full padding-container gap-x-[100px] py-[40px] md:py-[90px] flex md:flex-row flex-col-reverse relative"
         style={{
@@ -88,7 +96,7 @@ export default function Home() {
             </span>
           </div> */}
           <ButtonCustom className="mt-6 md:mt-12 2xl:mt-14 w-[267px] text-base self-center md:self-auto">
-            Start video
+            {settings[0]?.jsonValue?.btn_home_start}
           </ButtonCustom>
         </div>
         <div className="w-full md:w-[60%]">
@@ -108,7 +116,7 @@ export default function Home() {
           className="xl:w-[500px]"
           onClick={() => setOpenModalRegister(true)}
         >
-          Đăng kí tham dự triễn lãm
+          {settings[0]?.jsonValue?.btn_register_home}
         </ButtonCustom>
         <ModalRegisterExhibition
           openModalRegister={openModalRegister}

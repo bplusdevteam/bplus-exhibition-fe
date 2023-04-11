@@ -14,6 +14,7 @@ export default function Competition() {
   const [pageContent, setPageContent] = useState();
   const [competition, setCompetition] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [settings, SetSettings] = useState([]);
 
   const getContentPage = async () => {
     try {
@@ -26,8 +27,15 @@ export default function Competition() {
       setIsLoading(false);
     }
   };
+
+  const getSettings = async () => {
+    const res = await Api.get("/settings");
+    SetSettings(res?.data);
+  };
+
   useEffect(() => {
     getContentPage();
+    getSettings();
   }, []);
 
   const topPage = pageContent?.settings?.find(
@@ -46,8 +54,11 @@ export default function Competition() {
   );
 
   return (
-    <Layout isLoading={isLoading}>
-      <TopPage topPageContent={topPage} />
+    <Layout isLoading={isLoading} settings={settings}>
+      <TopPage
+        topPageContent={topPage}
+        buttonText={settings[0]?.jsonValue?.btn_register_competition_top_page}
+      />
       <div className="md:my-[100px]">
         <ContainerBg
           bgMargin="right"
@@ -125,7 +136,7 @@ export default function Competition() {
           />
           <div className="w-full h-full absolute flex items-center justify-center z-10 top-0">
             <ButtonCustom className="my-10">
-              Đăng kí tham dự cuộc thi
+              {settings[0]?.jsonValue?.btn_register_competition}
             </ButtonCustom>
           </div>
         </div>

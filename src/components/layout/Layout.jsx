@@ -9,7 +9,7 @@ import CoppyRight from "./CoppyRight";
 import Loading from "../common/Loading";
 import ButtonCustom from "../common/ButtonCustom";
 
-export default function Layout({ children, isLoading }) {
+export default function Layout({ children, isLoading, settings }) {
   return (
     <>
       <NavBar />
@@ -24,7 +24,7 @@ export default function Layout({ children, isLoading }) {
           className="w-full  max-w-[400px] mt-4 lg:mt-0"
           type="secondary"
         >
-          Đăng kí tham dự triễn lãm
+          {settings[0]?.jsonValue?.btn_ready_to_register || 'Đăng kí tham dự triễn lãm'}
         </ButtonCustom>
       </div>
       <Footer />
