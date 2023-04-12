@@ -1,15 +1,11 @@
 /* eslint-disable @next/next/no-img-element */
-import Image from "next/image";
-import LogoWhite from "../../assets/image/logoWhite.svg";
-import Instagram from "../../assets/image/intagram.svg";
-import Facebook from "../../assets/image/facebook.svg";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 import CoppyRight from "./CoppyRight";
 import Loading from "../common/Loading";
 import ButtonCustom from "../common/ButtonCustom";
 
-export default function Layout({ children, isLoading, settings }) {
+export default function Layout({ children, isLoading, settings = [] }) {
   return (
     <>
       <NavBar />
@@ -24,7 +20,7 @@ export default function Layout({ children, isLoading, settings }) {
           className="w-full  max-w-[400px] mt-4 lg:mt-0"
           type="secondary"
         >
-          {settings[0]?.jsonValue?.btn_ready_to_register || 'Đăng kí tham dự triễn lãm'}
+          {settings[0]?.jsonValue?.btn_ready_to_register || "Đăng kí tham dự triễn lãm"}
         </ButtonCustom>
       </div>
       <Footer />
